@@ -6,10 +6,20 @@ function AuthContextProvider({children}) {
     const [token , settoken]=useState('')
     const [isAuth , setisAuth]=useState(false)
 
-    
+    const loginUser = ()=>{
+        if(!isAuth){
+            return token 
+        }
+        else{
+            return children
+        }
+    }
+
+
+
     return(
         <>
-            <AuthContext.Provider value={{token,settoken,isAuth,setisAuth}}>{children}</AuthContext.Provider>
+            <AuthContext.Provider value={{token,settoken,isAuth,setisAuth ,loginUser }}>{children}</AuthContext.Provider>
         </>
     )
     

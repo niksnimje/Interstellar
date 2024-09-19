@@ -2,3 +2,26 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+
+body {
+  background-color: #f8f9fa; /* Light background color */
+}
+
+.table {
+  border: 2px solid #00ff62; /* Table border color */
+}
+
+.table th, .table td {
+  text-align: center; /* Center the text */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Primary button color */
+  border-color: #007bff; /* Button border color */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  border-color: #0056b3; /* Darker border on hover */
+}
