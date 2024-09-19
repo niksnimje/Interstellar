@@ -12,12 +12,12 @@ function AllRoutes() {
     <Route path="/" element={<Home />} />
 
     <Route path="/dashboard" element={
-      <PrivateRoute>
+      // <PrivateRoute>
       <Dashboard />
-      </PrivateRoute>
+      // </PrivateRoute>
       } />
     <Route path="/login" element={<Login />} />
-    <Route path="/singlepage" element={<SingleProductPage />} />
+    <Route path="/singlepage/:id" element={<SingleProductPage />} />
     <Route path="/*" element={<h1>Page is not Define</h1>} />
    </Routes>
 
