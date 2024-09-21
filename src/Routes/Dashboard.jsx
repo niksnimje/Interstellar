@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Dashboard() {
   const { token } = useContext(AuthContext);
   const [data, setData] = useState([]);
-
+  const {logoutUser}=useContext(AuthContext)
   useEffect(() => {
     axios.get("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-tech-products")
       .then((res) => {
@@ -18,7 +18,7 @@ export default function Dashboard() {
     <div className="container mt-4">
       <h3 className="text-center">Dashboard</h3>
       <div className="d-flex justify-content-between align-items-center">
-        <button className="btn btn-primary" data-testid="logout-btn">Logout</button>
+        <button className="btn btn-primary" data-testid="logout-btn" onClick={logoutUser}>Logout</button>
         <p>
           Token: <b data-testid="user-token">{token}</b>
         </p>

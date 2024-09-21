@@ -1,52 +1,55 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate, useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import Loader from "../Components/Loader";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const {  token, settoken } = useContext(AuthContext);
-  const navigate = useNavigate(); 
 
-  const UserData={
-    email,
-    password,
+  const [email,setemail]=useState("")
+  const [password,setpassword]=useState("")
+  const {loginUser,auth}=useContext(AuthContext)
+  const {isloading,setisloading}=useState(false)
+  // const navigate=useNavigate()
+  console.log(auth)
+
+  const handelSubmit=(e)=>{
+    e.preventDefault()
+    AllData()
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post("https://reqres.in/api/login",UserData);
-      settoken(response.data.token);
-      // navigate("/"); 
-      navigate("/dashboard")
-      console.log(token)
-    } catch (err) {
-      console.error(err);
+  const AllData=()=>{
+    const UserData={
+      email,
+      password
     }
-  };
+    useEffect(()=>{
+      setisloading(true)
+      axios.post("https://reqres.in/api/login",UserData)
+      .then((res)=>{
+        setisloading(false)
+        loginUser(res.data.token)
+        // navigate("/dashboard")
+      })
+      .catch((err)=>console.log(err))
+    },[])
+    
+  }
 
-  return (
+  return isloading ? <Loader />:(
     <div>
-      <form data-testid="login-form" onSubmit={handleSubmit}>
+      <form data-testid="login-form" onSubmit={(e)=>handelSubmit(e)}>
         <div>
           <label>
             Email 
-            <input 
-              onChange={(e) => setEmail(e.target.value)} 
-              data-testid="email-input" 
-              type="email" 
-              placeholder="email" 
-            />
+            <input  onChange={(e)=>setemail(e.target.value)} data-testid="email-input" o type="email" placeholder="email" />
           </label>
         </div>
         <div>
           <label>
             Password
             <input
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e)=>setpassword(e.target.value)}
               data-testid="password-input"
               type="password"
               placeholder="password"
@@ -64,5 +67,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;

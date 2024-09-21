@@ -12,9 +12,9 @@ function AllRoutes() {
     <Route path="/" element={<Home />} />
 
     <Route path="/dashboard" element={
-      // <PrivateRoute>
+      <PrivateRoute>
       <Dashboard />
-      // </PrivateRoute>
+       </PrivateRoute>
       } />
     <Route path="/login" element={<Login />} />
     <Route path="/singlepage/:id" element={<SingleProductPage />} />
